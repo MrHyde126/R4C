@@ -14,7 +14,7 @@ class Robot(models.Model):
     class Meta:
         verbose_name = 'Робот'
         verbose_name_plural = 'Роботы'
-        ordering = ('serial',)
+        ordering = ('serial', '-created')
 
     def __str__(self):
         return self.serial
