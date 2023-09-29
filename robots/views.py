@@ -1,3 +1,4 @@
+import re
 from datetime import datetime, timedelta
 from http import HTTPStatus
 
@@ -11,7 +12,7 @@ from .models import Robot
 
 @csrf_exempt
 def produce_robot(request):
-    if request.POST:
+    if request.method == 'POST':
         if set(request.POST) < {'model', 'version', 'created'}:
             return HttpResponse(
                 'В запросе должны быть ключи "model", "version" и "created".',
@@ -25,9 +26,16 @@ def produce_robot(request):
                 'Поля "model", "version" и "created" не долны быть пустыми.',
                 status=HTTPStatus.BAD_REQUEST,
             )
-        if not Robot.objects.filter(model=model, version=version).exists():
+        model_pattern = r'^[0-9A-Z]{2}$'
+        if not re.match(model_pattern, model):
             return HttpResponse(
-                'Робота такой модели и версии не существует.',
+                f'`{model}` не соответствует паттерну `{model_pattern}`.',
+                status=HTTPStatus.BAD_REQUEST,
+            )
+        version_pattern = r'^[0-9A-Z]{1,2}$'
+        if not re.match(version_pattern, version):
+            return HttpResponse(
+                f'`{version}` не соответствует паттерну `{version_pattern}`.',
                 status=HTTPStatus.BAD_REQUEST,
             )
         try:

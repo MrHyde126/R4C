@@ -60,6 +60,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'R4C.wsgi.application'
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases

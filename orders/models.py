@@ -17,4 +17,4 @@ class Order(models.Model):
         ordering = ('customer',)
 
     def __str__(self):
-        return f'{self.сustomer.email} заказал {self.robot_serial}'
+        return f'{self.customer.email} заказал {self.robot_serial}'
