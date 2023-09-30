@@ -7,3 +7,4 @@ from .models import Customer
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('email',)
     search_fields = ('email',)
+    list_per_page = 30

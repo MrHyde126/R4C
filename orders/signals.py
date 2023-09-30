@@ -9,7 +9,9 @@ waiting_emails = {}
 
 def add_to_waiting(serial, email):
     if serial in waiting_emails:
-        waiting_emails[serial].append(email)
+        if email not in waiting_emails[serial]:
+            waiting_emails[serial].append(email)
+        return
     else:
         waiting_emails[serial] = [email]
 

@@ -7,3 +7,5 @@ from .models import Robot
 class RobotAdmin(admin.ModelAdmin):
     list_display = ('serial', 'created')
     search_fields = ('serial',)
+    list_filter = ('model',)
+    list_per_page = 30
